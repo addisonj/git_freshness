@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d lib",
-    "watch": "babel -w src -d lib"
+    "watch": "babel -w src -d lib",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "git",
@@ -20,5 +21,8 @@
     "chalk": "^1.0.0",
     "moment": "^2.9.0",
     "yargs": "^3.5.4"
+  },
+  "devDependencies": {
+    "babel": "^4.7.8"
   }
 }
