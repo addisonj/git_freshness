@@ -9,6 +9,9 @@
     "watch": "babel -w src -d lib",
     "prepublish": "npm run build"
   },
+  "bin": {
+    "git_freshness": "bin/git_freshness.js"
+  },
   "keywords": [
     "git",
     "freshness",

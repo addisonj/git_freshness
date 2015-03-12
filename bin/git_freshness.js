@@ -22,7 +22,6 @@ if (argv.format === "json") {
 }
 var freshner = new GitFreshness(pathToProcess)
 freshner.run(function(err, data) {
-  console.log(err)
   if (err) throw err
   console.log(new formatter(data).format())
 })

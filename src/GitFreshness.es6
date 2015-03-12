@@ -28,7 +28,7 @@ class GitFreshness {
     var c = `git blame -w -c ${file} | cut -f 3`
     this.execCommand(c, (err, lines) => {
       if (err) return cb(err)
-      getCommitDates(file, (err, dates) => {
+      this.getCommitDates(file, (err, dates) => {
         if (err) return cb(err)
         var total = lines.length
         var times = lines.map((line) => {
@@ -55,7 +55,7 @@ class GitFreshness {
   run(cb) {
     this.getFiles((err, files) => {
       if (err) return cb(err)
-      async.map(files, computeAgeForFile, cb)
+      async.map(files, this.computeAgeForFile.bind(this), cb)
     })
   }
 }

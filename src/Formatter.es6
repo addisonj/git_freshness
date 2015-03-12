@@ -19,14 +19,16 @@ class JSONFormatter extends Formatter {
 class StringFormatter extends Formatter {
   format() {
     var out = ''
-    for (var d of data) {
-      out += `${chalk.green.bold(d.file)}
+    this.data.forEach((d) => {
+      out += `
+File: ${chalk.red.bold.underline(d.file)}
+  ${chalk.bold('Average age:')} ${moment(d.averageAgeDate).fromNow(true)}
+  ${chalk.bold('First Commit:')} ${moment(d.firstCommitDate).fromNow(true)}
+  ${chalk.bold('Last Commit:')} ${moment(d.lastCommitDate).fromNow(true)}
 
-      ${chalk.bold('Average age:')} ${moment(d.averageAgeDate).fromNow(true)}
-      ${chalk.bold('First Commit:')} ${moment(d.firstCommitDate).fromNow(true)}
-      ${chalk.bold('Last Commit:')} ${moment(d.lastCommitDate).fromNow(true)}
       `
-    }
+    })
+    return out
   }
 }
 
