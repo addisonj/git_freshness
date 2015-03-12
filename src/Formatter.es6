@@ -17,14 +17,23 @@ class JSONFormatter extends Formatter {
 }
 
 class StringFormatter extends Formatter {
+  diffDate(start, earlier) {
+    var days = start.diff(earlier, 'days')
+    if (days === 1) {
+      return days + ' day'
+    } else {
+      return days + ' days'
+    }
+  }
   format() {
     var out = ''
+    var startTime = moment()
     this.data.forEach((d) => {
       out += `
 File: ${chalk.red.bold.underline(d.file)}
-  ${chalk.bold('Average age:')} ${moment(d.averageAgeDate).fromNow(true)}
-  ${chalk.bold('First Commit:')} ${moment(d.firstCommitDate).fromNow(true)}
-  ${chalk.bold('Last Commit:')} ${moment(d.lastCommitDate).fromNow(true)}
+  ${chalk.bold('Average age:')} ${this.diffDate(startTime, d.averageAgeDate)} old
+  ${chalk.bold('First Commit:')} ${this.diffDate(startTime, d.firstCommitDate)} ago
+  ${chalk.bold('Last Commit:')} ${this.diffDate(startTime, d.lastCommitDate)} ago
 
       `
     })

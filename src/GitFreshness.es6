@@ -55,7 +55,10 @@ class GitFreshness {
   run(cb) {
     this.getFiles((err, files) => {
       if (err) return cb(err)
-      async.map(files, this.computeAgeForFile.bind(this), cb)
+      async.map(files, this.computeAgeForFile.bind(this), (err, files) => {
+        if (err) return cb(err)
+        cb(null, files.sort((a, b) => b.averageAgeDate - a.averageAgeDate))
+      })
     })
   }
 }
